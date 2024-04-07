@@ -17,7 +17,7 @@ public class MemberTests {
     public void createMember() {
         MemberJoinRequestDTO memberJoinRequestDTO = new MemberJoinRequestDTO();
         MemberResponseDTO responseDTO = new MemberResponseDTO();
-        memberJoinRequestDTO.setEmail("aaaa");
+        //memberJoinRequestDTO.setEmail("aaaa");
         memberService.createMember(memberJoinRequestDTO,responseDTO);
     }
 }

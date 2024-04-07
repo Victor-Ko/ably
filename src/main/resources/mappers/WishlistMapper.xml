@@ -73,13 +73,21 @@
           AND TWP.WISHLIST_SEQ = #{wishlistSequence}
     </select>
     <select id="getWishProductList" parameterType="com.victor.ably.wishlist.vo.WishProductConditionVO" resultType="com.victor.ably.wishlist.vo.WishProductResultVO">
-        SELECT WISHLIST_SEQ,
-               PROD_CD,
-               PROD_NM,
-               PROD_IMG,
-               REG_DT
-        FROM TB_WISH_PRODUCT
-        WHERE WISHLIST_SEQ = #{wishlistSequence}
+        SELECT *
+        FROM (
+            SELECT ROWNUM AS NUMB
+                 , T.*
+            FROM (
+                SELECT WISHLIST_SEQ,
+                       PROD_CD,
+                       PROD_NM,
+                       PROD_IMG,
+                       REG_DT
+                FROM TB_WISH_PRODUCT
+                WHERE WISHLIST_SEQ = #{wishlistSequence}
+            ) T
+        )
+        WHERE NUMB BETWEEN #{startRow} AND #{endRow}
     </select>
     <select id="checkDuplicateWishList" parameterType="com.victor.ably.wishlist.vo.WishListConditionVO" resultType="java.lang.Integer">
         SELECT COUNT(1)
@@ -93,9 +101,17 @@
         WHERE EMAIL = #{memberEmail}
     </select>
     <select id="getWishList" parameterType="com.victor.ably.wishlist.vo.WishListConditionVO" resultType="com.victor.ably.wishlist.vo.WishlistResultVO">
-        SELECT NAME
-             , LIST_IMG
-        FROM TB_WISHLIST
-        WHERE EMAIL = #{memberEmail}
+        SELECT *
+        FROM (
+            SELECT ROWNUM AS NUMB
+                 , T.*
+            FROM (
+                SELECT NAME
+                     , LIST_IMG
+                FROM TB_WISHLIST
+                WHERE EMAIL = #{memberEmail}
+            ) T
+        )
+        WHERE NUMB BETWEEN #{startRow} AND #{endRow}
     </select>
 </mapper>

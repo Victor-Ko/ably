@@ -3,6 +3,8 @@ package com.victor.ably.wishlist.dto.request;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 @RequiredArgsConstructor
 @Getter
 public class WishProductRequestDTO {
@@ -10,6 +12,7 @@ public class WishProductRequestDTO {
     //찜목록 아이디
     private long wishlistSequence;
     //찜 상품코드
+    @NotBlank
     private String productCode;
     //찜 상품명
     private String productName;
