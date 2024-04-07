@@ -50,8 +50,10 @@ public class MemberService {
         MemberInfoConditionVO memberInfoConditionVO = MemberInfoConditionVO.ofLogin(requestDTO.getEmail(), requestDTO.getPassword());
         MemberInfoResultVO memberInfoVO =  memberDao.selectMemberInfo(memberInfoConditionVO);
         memberDao.insertLoginHistory(memberInfoConditionVO);
-        session.setAttribute("email", memberInfoVO.getEmail());
-        session.setAttribute("name", memberInfoVO.getName());
+        // 신규 세션 생성
+        HttpSession new_session = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest().getSession();
+        new_session.setAttribute("email", memberInfoVO.getEmail());
+        new_session.setAttribute("name", memberInfoVO.getName());
         responseDTO.setResultCode(1);
         responseDTO.setResultMessage("로그인 성공");
     }

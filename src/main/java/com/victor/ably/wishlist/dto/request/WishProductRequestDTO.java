@@ -3,16 +3,17 @@ package com.victor.ably.wishlist.dto.request;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @RequiredArgsConstructor
 @Getter
 public class WishProductRequestDTO {
 
     //찜목록 아이디
-    private long wishlistSequence;
+    @NotNull
+    private Long wishlistSequence;
     //찜 상품코드
-    @NotBlank
+    @NotNull
     private String productCode;
     //찜 상품명
     private String productName;

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -33,7 +34,7 @@ public class WishlistController {
 
     //상품찜하기
     @PostMapping(value = "/product")
-    public ResponseEntity<?> addWishProduct(@Validated @RequestBody WishProductRequestDTO requestDTO) {
+    public ResponseEntity<?> addWishProduct(@Valid @RequestBody WishProductRequestDTO requestDTO) {
         WishProductResponseDTO responseDTO = new WishProductResponseDTO();
         try {
             wishlistService.addWishProduct(requestDTO, responseDTO);

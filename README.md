@@ -9,13 +9,14 @@
 
 1. JDK 19 이상 설치
 2. H2 DB 설치(https://h2database.com/html/main.html)
-3. spring boot run configuration 설정(com.victor.ably.AblyApplication)
-4. 프로그램 실행
+3. H2 DB 실행
+4. spring boot run configuration 설정(com.victor.ably.AblyApplication)
+5. 프로그램 실행
 
 <h2> API 명세 </h2>
 
 1.  회원
-    - (POST)//member/join : 회원가입
+    - (POST)/member/join : 회원가입
     - (GET)/member/login : 로그인
     - (GET)/member/info : 내정보조회
 2. 찜 목록 
@@ -32,3 +33,5 @@
 - mapstruct를 사용하여 VO<->DTO간 데이터변환에 용이하도록 함
 - spring validation annotation을 사용하여 입력값에 대한 검증
 - 기본 DDL문을 실행하도록 하여 테이블 생성이 용이
+
+<h2> 

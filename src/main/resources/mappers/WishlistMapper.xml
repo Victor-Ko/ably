@@ -27,6 +27,7 @@
         (
           NAME
         , LIST_IMG
+        , EMAIL
         , REG_DT
         , UP_DT
         )
@@ -34,6 +35,7 @@
         (
           #{wishlistName}
         , #{listImagePath}
+        , #{memberEmail}
         , NOW()
         , NOW()
         )
@@ -42,7 +44,7 @@
         DELETE FROM TB_WISH_PRODUCT
         WHERE PROD_CD = #{productCode}
     </delete>
-    <delete id="deleteWishProductBySequence" parameterType="int">
+    <delete id="deleteWishProductBySequence" parameterType="long">
         DELETE FROM TB_WISH_PRODUCT
         WHERE WISHLIST_SEQ = #{wishlistSequence}
     </delete>
@@ -78,11 +80,11 @@
             SELECT ROWNUM AS NUMB
                  , T.*
             FROM (
-                SELECT WISHLIST_SEQ,
-                       PROD_CD,
-                       PROD_NM,
-                       PROD_IMG,
-                       REG_DT
+                SELECT WISHLIST_SEQ AS wishlistSequence,
+                       PROD_CD AS productCode,
+                       PROD_NM AS productName,
+                       PROD_IMG AS productImgPath,
+                       REG_DT AS registerDate
                 FROM TB_WISH_PRODUCT
                 WHERE WISHLIST_SEQ = #{wishlistSequence}
             ) T
@@ -106,8 +108,9 @@
             SELECT ROWNUM AS NUMB
                  , T.*
             FROM (
-                SELECT NAME
-                     , LIST_IMG
+                SELECT NAME AS wishlistName
+                     , LIST_IMG AS listImagePath
+                     , REG_DT AS registerDate
                 FROM TB_WISHLIST
                 WHERE EMAIL = #{memberEmail}
             ) T

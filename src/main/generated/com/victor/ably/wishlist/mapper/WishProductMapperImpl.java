@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-07T13:50:06+0900",
+    date = "2024-04-07T19:30:10+0900",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 19.0.2 (Oracle Corporation)"
 )
 @Component
@@ -22,6 +22,12 @@ public class WishProductMapperImpl implements WishProductMapper {
         }
 
         WishProductDTO wishProductDTO = new WishProductDTO();
+
+        wishProductDTO.setWishlistSequence( wishProductResultVO.getWishlistSequence() );
+        wishProductDTO.setProductCode( wishProductResultVO.getProductCode() );
+        wishProductDTO.setProductName( wishProductResultVO.getProductName() );
+        wishProductDTO.setProductImgPath( wishProductResultVO.getProductImgPath() );
+        wishProductDTO.setRegisterDate( wishProductResultVO.getRegisterDate() );
 
         return wishProductDTO;
     }
