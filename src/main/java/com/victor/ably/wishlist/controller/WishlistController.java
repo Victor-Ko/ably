@@ -8,6 +8,7 @@ import com.victor.ably.wishlist.dto.request.WishlistRequestDTO;
 import com.victor.ably.wishlist.dto.response.WishProductResponseDTO;
 import com.victor.ably.wishlist.dto.response.WishlistResponseDTO;
 import com.victor.ably.wishlist.service.WishlistService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -34,7 +34,7 @@ public class WishlistController {
 
     //상품찜하기
     @PostMapping(value = "/product")
-    public ResponseEntity<?> addWishProduct(@Valid @RequestBody WishProductRequestDTO requestDTO) {
+    public ResponseEntity<?> addWishProduct(@RequestBody @Valid WishProductRequestDTO requestDTO) {
         WishProductResponseDTO responseDTO = new WishProductResponseDTO();
         try {
             wishlistService.addWishProduct(requestDTO, responseDTO);

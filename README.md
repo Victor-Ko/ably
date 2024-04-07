@@ -31,7 +31,6 @@
 
 - 공통익셉션 클래스 적용
 - mapstruct를 사용하여 VO<->DTO간 데이터변환에 용이하도록 함
-- spring validation annotation을 사용하여 입력값에 대한 검증
 - 기본 DDL문을 실행하도록 하여 테이블 생성이 용이
 
 <h2> 
