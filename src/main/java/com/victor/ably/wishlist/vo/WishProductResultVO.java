@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @RequiredArgsConstructor
 @Getter
 @Setter
@@ -14,4 +16,5 @@ public class WishProductResultVO {
     private String productName;
     private String productImgPath;
     private String registerDate;
+    private BigDecimal price;
 }

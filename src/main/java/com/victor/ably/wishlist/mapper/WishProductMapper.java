@@ -22,6 +22,7 @@ public interface WishProductMapper {
             @Mapping(source = "productName", target = "productName"),
             @Mapping(source = "productImgPath", target = "productImgPath"),
             @Mapping(source = "registerDate", target = "registerDate"),
+            @Mapping(source = "price", target = "price"),
     })
     WishProductDTO wishProductResultVOToWishProductDTO(WishProductResultVO wishProductResultVO);
     List<WishProductDTO> toWishProductDTO(List<WishProductResultVO> wishProductResultVOList);

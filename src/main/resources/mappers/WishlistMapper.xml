@@ -7,8 +7,9 @@
         (
           WISHLIST_SEQ
         , PROD_CD
-        , PROD_NM
-        , PROD_IMG
+        , NAME
+        , THUMBNAIL
+        , PRICE
         , REG_DT
         , UP_DT
         )
@@ -18,6 +19,7 @@
         , #{productCode}
         , #{productName}
         , #{productImgPath}
+        , #{price}
         , NOW()
         , NOW()
         )
@@ -82,8 +84,9 @@
             FROM (
                 SELECT WISHLIST_SEQ AS wishlistSequence,
                        PROD_CD AS productCode,
-                       PROD_NM AS productName,
-                       PROD_IMG AS productImgPath,
+                       NAME AS productName,
+                       THUMBNAIL AS productImgPath,
+                       PRICE as price,
                        REG_DT AS registerDate
                 FROM TB_WISH_PRODUCT
                 WHERE WISHLIST_SEQ = #{wishlistSequence}

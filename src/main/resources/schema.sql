@@ -38,8 +38,9 @@ create table TB_WISH_PRODUCT
 (
     wishlist_seq bigint,
     prod_cd varchar(255),
-    prod_nm varchar(255),
-    prod_img varchar(255),
+    name varchar(255),
+    price bigint,
+    thumbnail varchar(255),
     reg_dt timestamp,
     up_dt timestamp,
     primary key (wishlist_seq, prod_cd)

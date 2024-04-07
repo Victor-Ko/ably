@@ -40,7 +40,7 @@ public class WishlistService {
             if (wishlistDao.checkDuplicateWishProduct(WishProductConditionVO.of(memberEmail, requestDTO.getProductCode())) == 0) {
                 //찜등록
                 if(wishlistDao.insertWishProduct(WishProductParamVO.ofInsert(memberEmail,  requestDTO.getProductCode(),
-                        requestDTO.getProductName(), requestDTO.getProductImgPath(), requestDTO.getWishlistSequence())) > 0){
+                        requestDTO.getProductName(), requestDTO.getProductImgPath(), requestDTO.getPrice(), requestDTO.getWishlistSequence())) > 0){
                     responseDTO.setResultMessage("찜 상품 등록 성공.");
                     isSuccess = true;
                 }else{

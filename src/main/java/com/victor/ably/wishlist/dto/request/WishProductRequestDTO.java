@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @RequiredArgsConstructor
 @Getter
@@ -19,4 +20,5 @@ public class WishProductRequestDTO {
     private String productName;
     //찜 상품이미지 경로
     private String productImgPath;
+    private BigDecimal price;
 }
