@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.victor.ably.member.dao.MemberDao">
+
+    <select id="checkMemberEmailDuplication" parameterType="java.lang.String" resultType="int">
+        SELECT COUNT(1)
+        FROM TB_MEMBER
+        WHERE EMAIL =  #{email}
+    </select>
+
+    <insert id="insertMemberJoinInfo" parameterType="com.victor.ably.member.vo.MemberParamVO">
+        INSERT INTO TB_MEMBER
+        (
+            EMAIL
+          , PASSWORD
+          , NAME
+          , BIRTH
+          , GENDER
+          , REG_DT
+          , UP_DT
+        )
+        VALUES
+        (
+          #{email}
+        , #{password}
+        , #{name}
+        , #{birth}
+        , #{gender}
+        , NOW()
+        , NOW()
+        )
+    </insert>
+
+    <select id="selectMemberInfo" parameterType="com.victor.ably.member.vo.MemberInfoConditionVO" resultType="com.victor.ably.member.vo.MemberInfoResultVO">
+        SELECT EMAIL
+             , NAME
+             , BIRTH
+             , GENDER
+        FROM TB_MEMBER
+        WHERE EMAIL = #{email}
+        <if test="password != null and password != ''">
+            AND PASSWORD = #{password}
+        </if>
+    </select>
+
+    <insert id="insertLoginHistory">
+        INSERT INTO TB_MEMBER_LOGIN_HST
+        (
+            EMAIL
+          , REG_DT
+        )
+        VALUES
+            (
+            #{email}
+            , NOW()
+            )
+    </insert>
+
+</mapper>

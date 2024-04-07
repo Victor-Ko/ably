@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.victor.ably.wishlist.dao.WishlistDao">
+    <insert id="insertWishProduct" parameterType="com.victor.ably.wishlist.vo.WishProductParamVO">
+        INSERT INTO TB_WISH_PRODUCT
+        (
+          WISHLIST_SEQ
+        , PROD_CD
+        , PROD_NM
+        , PROD_IMG
+        , REG_DT
+        , UP_DT
+        )
+        VALUES
+        (
+          #{wishlistSequence}
+        , #{productCode}
+        , #{productName}
+        , #{productImgPath}
+        , NOW()
+        , NOW()
+        )
+    </insert>
+    <insert id="insertWishList" parameterType="com.victor.ably.wishlist.vo.WishListParamVO">
+        INSERT INTO TB_WISHLIST
+        (
+          NAME
+        , LIST_IMG
+        , REG_DT
+        , UP_DT
+        )
+        VALUES
+        (
+          #{wishlistName}
+        , #{listImagePath}
+        , NOW()
+        , NOW()
+        )
+    </insert>
+    <delete id="deleteWishProduct" parameterType="string">
+        DELETE FROM TB_WISH_PRODUCT
+        WHERE PROD_CD = #{productCode}
+    </delete>
+    <delete id="deleteWishProductBySequence" parameterType="int">
+        DELETE FROM TB_WISH_PRODUCT
+        WHERE WISHLIST_SEQ = #{wishlistSequence}
+    </delete>
+    <delete id="deleteWishList">
+        DELETE FROM TB_WISHLIST
+        WHERE WISHLIST_SEQ = #{wishlistSequence}
+    </delete>
+
+    <select id="selectMyWishlistCount" parameterType="com.victor.ably.wishlist.vo.WishListConditionVO" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM TB_WISHLIST
+        WHERE EMAIL = #{memberEmail}
+    </select>
+    <select id="checkDuplicateWishProduct" parameterType="com.victor.ably.wishlist.vo.WishProductConditionVO" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM TB_WISHLIST TW
+           , TB_WISH_PRODUCT TWP
+        WHERE TW.WISHLIST_SEQ = TWP.WISHLIST_SEQ
+        AND TW.EMAIL = #{memberEmail}
+        AND TWP.PROD_CD = #{productCode}
+    </select>
+    <select id="getWishProductCount" parameterType="com.victor.ably.wishlist.vo.WishProductConditionVO" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM TB_WISHLIST TW
+           , TB_WISH_PRODUCT TWP
+        WHERE TW.WISHLIST_SEQ = TWP.WISHLIST_SEQ
+          AND TW.EMAIL = #{memberEmail}
+          AND TWP.WISHLIST_SEQ = #{wishlistSequence}
+    </select>
+    <select id="getWishProductList" parameterType="com.victor.ably.wishlist.vo.WishProductConditionVO" resultType="com.victor.ably.wishlist.vo.WishProductResultVO">
+        SELECT WISHLIST_SEQ,
+               PROD_CD,
+               PROD_NM,
+               PROD_IMG,
+               REG_DT
+        FROM TB_WISH_PRODUCT
+        WHERE WISHLIST_SEQ = #{wishlistSequence}
+    </select>
+    <select id="checkDuplicateWishList" parameterType="com.victor.ably.wishlist.vo.WishListConditionVO" resultType="java.lang.Integer">
+        SELECT COUNT(1)
+        FROM TB_WISHLIST
+        WHERE EMAIL = #{memberEmail}
+        AND NAME = #{wishlistName}
+    </select>
+    <select id="getWishListCount" parameterType="com.victor.ably.wishlist.vo.WishListConditionVO" resultType="java.lang.Integer">
+        SELECT COUNT(1)
+        FROM TB_WISHLIST
+        WHERE EMAIL = #{memberEmail}
+    </select>
+    <select id="getWishList" parameterType="com.victor.ably.wishlist.vo.WishListConditionVO" resultType="com.victor.ably.wishlist.vo.WishlistResultVO">
+        SELECT NAME
+             , LIST_IMG
+        FROM TB_WISHLIST
+        WHERE EMAIL = #{memberEmail}
+    </select>
+</mapper>
